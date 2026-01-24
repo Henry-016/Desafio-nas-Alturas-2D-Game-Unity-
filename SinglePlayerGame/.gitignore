@@ -1,1 +1,22 @@
+# --- Pastas Temporárias da Unity (Obrigatório ignorar) ---
+/[Ll]ibrary/
+/[Tt]emp/
+/[Obj]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Logs]ogs/
+/[MemoryCaptures]emoryCaptures/
+/[UserSettings]userSettings/
 
+# --- Arquivos de Solução do VS Code / Visual Studio ---
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# --- Arquivos de Sistema ---
+.DS_Store
+Thumbs.db
