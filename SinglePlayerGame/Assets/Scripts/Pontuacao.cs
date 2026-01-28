@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Pontuacao : MonoBehaviour
 {
-    [SerializeField]
-    private Text textoPontuacao;
+    [SerializeField] private Text textoPontuacao;
+
+    [SerializeField] private UnityEvent aoPontuar;
 
     private AudioSource audioPontuacao;
 
@@ -19,6 +21,7 @@ public class Pontuacao : MonoBehaviour
     {
         Pontos += 1;
         textoPontuacao.text = Pontos.ToString();
+        aoPontuar.Invoke();
         audioPontuacao.Play();
     }
 

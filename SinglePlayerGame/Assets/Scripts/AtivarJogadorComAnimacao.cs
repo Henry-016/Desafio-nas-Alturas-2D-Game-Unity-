@@ -1,0 +1,12 @@
+using UnityEngine;
+using UnityEngine.Events;
+
+public class AtivarJogadorComAnimacao : MonoBehaviour
+{
+    [SerializeField] private UnityEvent aoTerminarAnimacao;
+
+    public void AtivarJogador()
+    {
+        aoTerminarAnimacao.Invoke();
+    }
+}

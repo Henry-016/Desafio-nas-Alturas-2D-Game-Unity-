@@ -1,18 +1,11 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Events;
 
 public class Obstaculo : MonoBehaviour
 {
-    [SerializeField]
-    private VariavelCompartilhada velocidade;
+    [SerializeField] private VariavelCompartilhada velocidade;
 
-    [SerializeField]
-    private float variacaoDaPosicaoY;
-
-    private Vector3 posicaoDoAviao;
-
-    private bool pontuei;
+    [SerializeField] private float variacaoDaPosicaoY;
     
     private Pontuacao pontuacao;
 
@@ -23,20 +16,12 @@ public class Obstaculo : MonoBehaviour
 
     private void Start()
     {
-        posicaoDoAviao = GameObject.FindAnyObjectByType<Aviao>().transform.position;
         pontuacao = GameObject.FindAnyObjectByType<Pontuacao>();
     }
 
     private void Update()
     {
         this.transform.Translate(Vector3.left * (velocidade.valor * Time.deltaTime));
-
-        if (transform.position.x < posicaoDoAviao.x && !pontuei)
-        {
-            pontuei = true;
-            pontuacao.AdicionarPontos();
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

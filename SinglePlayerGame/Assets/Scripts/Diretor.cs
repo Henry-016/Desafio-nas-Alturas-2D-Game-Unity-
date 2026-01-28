@@ -6,13 +6,11 @@ public class Diretor : MonoBehaviour
 
     [SerializeField] private ControleDeDificuldade controleDeDificuldade;
 
-    [SerializeField] private CameraShake cameraShake;
-
     private Aviao aviao;
     private Pontuacao pontuacao;
     private InterfaceGameOver interfaceGameOver;
 
-    private void Start()
+    protected virtual void Start()
     {
         aviao = GameObject.FindAnyObjectByType<Aviao>();
         pontuacao = GameObject.FindAnyObjectByType<Pontuacao>();
@@ -23,12 +21,11 @@ public class Diretor : MonoBehaviour
     {
         Time.timeScale = 0;
         trilhaSonora.Stop();
-        StartCoroutine(cameraShake.Shake(0.03f, 0.14f));
         pontuacao.SalvarRecorde();
         interfaceGameOver.MostrarInterface();
     }
 
-    public void ReiniciarJogo()
+    public virtual void ReiniciarJogo()
     {
         interfaceGameOver.EsconderInterface();
         Time.timeScale = 1;

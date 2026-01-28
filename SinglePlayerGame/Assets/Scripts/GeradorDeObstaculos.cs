@@ -16,6 +16,8 @@ public class GeradorDeObstaculos : MonoBehaviour
 
     private float cronometro;
 
+    private bool parado = false;
+
     private void Awake()
     {
         cronometro = tempoParaGerarFacil;
@@ -28,6 +30,11 @@ public class GeradorDeObstaculos : MonoBehaviour
 
     private void Update()
     {
+        if(parado)
+        {
+            return;
+        }
+
         cronometro -= Time.deltaTime;
 
         if(cronometro < 0)
@@ -36,4 +43,15 @@ public class GeradorDeObstaculos : MonoBehaviour
             cronometro = Mathf.Lerp(tempoParaGerarFacil, tempoParaGerarDificil, controleDeDificuldade.dificuldade);
         }
     }
+
+    public void Parar()
+    {
+        parado = true;
+    }
+
+    public void Recomecar()
+    {
+        parado = false;
+    }
+
 }

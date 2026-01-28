@@ -1,14 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class Aviao : MonoBehaviour
 {
     private Rigidbody2D fisica;
 
-    [SerializeField]
-    private float forca;
+    [SerializeField] private float forca;
+    [SerializeField] private UnityEvent aoBater;
+    [SerializeField] private UnityEvent aoPassarPeloObstaculo;
 
-    private Diretor diretor;
     private Vector3 posicaoInicial;
     private Animator animacao;
     private AudioSource audioQuedaDoAviao;
@@ -22,27 +22,22 @@ public class Aviao : MonoBehaviour
         posicaoInicial = transform.position;
     }
 
-    private void Start()
-    {
-        diretor = GameObject.FindAnyObjectByType<Diretor>();
-    }
-
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            deveImpulsionar = true;
-        }
-
         animacao.SetFloat("VelocidadeY", fisica.linearVelocity.y);
     }
 
     private void FixedUpdate()
     {
-        if (deveImpulsionar == true)
+        if (deveImpulsionar)
         {
             this.Impulsionar();
         }
+    }
+
+    public void DarImpulso()
+    {
+        deveImpulsionar = true;
     }
 
     private void Impulsionar()
@@ -56,7 +51,12 @@ public class Aviao : MonoBehaviour
     {
         audioQuedaDoAviao.Play();
         fisica.simulated = false;
-        diretor.FinalizarJogo();
+        aoBater.Invoke();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        aoPassarPeloObstaculo.Invoke();
     }
 
     public void Reiniciar()
